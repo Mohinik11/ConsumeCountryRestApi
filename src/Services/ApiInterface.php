@@ -15,9 +15,4 @@ interface ApiInterface
      */
     public function get($url);
 
-    /**
-     * Post API.
-     *
-     */
-    public function post($url, $fields, $contentType = 'json');
 }

@@ -7,7 +7,6 @@ use ApiHandler\ApiService;
 
 class CountryControllerTest extends TestCase
 {
-
     /**
      * CountryRepository
      *
@@ -18,7 +17,7 @@ class CountryControllerTest extends TestCase
     /**
      * CountryController
      *
-     * @type  ExportDate
+     * @type  CountryController
      */
     protected $ctrl;
 
@@ -59,6 +58,24 @@ class CountryControllerTest extends TestCase
         return [
             ['test', 123],
             ['test', '!#$test']
+        ];
+    }
+
+    /**
+     * @dataProvider additionProviderNotFound
+     */
+    public function testGetCountryDetailsNotFoundException($file, $name)
+    {
+        $this->repo->expects($this->any())->method('getCountryByName')->will($this->throwException(new Exception()));
+        $this->expectException(Exception::class);
+        $this->ctrl->getCountryDetails([$file, $name]);
+    }
+
+    public function additionProviderNotFound()
+    {
+        return [
+            ['test', 'NotFoundCountry'],
+            ['test', 'NoCountry1', 'NoCountry2']
         ];
     }
 
