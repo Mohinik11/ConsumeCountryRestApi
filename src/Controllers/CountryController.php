@@ -34,7 +34,7 @@ class CountryController extends CommonController
     {
         $countryDataOne = json_decode($this->repo->getCountryByName($countryOne));
         $countryDataTwo = json_decode($this->repo->getCountryByName($countryTwo));
-        return (count(array_diff(array_column($countryDataOne[0]->languages, 'iso639_1'), array_column($countryDataTwo[0]->languages, 'iso639_1'))) == 0);
+        return (count(array_intersect(array_column($countryDataOne[0]->languages, 'iso639_1'), array_column($countryDataTwo[0]->languages, 'iso639_1'))) > 0);
     }
 
     /**
